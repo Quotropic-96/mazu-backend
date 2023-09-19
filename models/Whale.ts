@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from "mongoose";
-import { IWhale, IWhaleSize } from '../interfaces/whaleTypes'
+import { IWhale, IWhaleSize } from "../interfaces/whaleTypes";
 
 const WhaleSizeSchema = new Schema<IWhaleSize>({
   gender: {
@@ -30,6 +30,10 @@ const WhaleSchema = new Schema<IWhale>({
     type: [WhaleSizeSchema],
     required: [true, "Whale's size is required"],
     validate: [arrayLimit, "Exceeds the limit of size records"],
+  },
+  curiosities: {
+    type: [String],
+    default: ["No information to display"],
   },
 });
 

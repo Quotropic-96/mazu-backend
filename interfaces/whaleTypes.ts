@@ -10,4 +10,5 @@ export interface IWhale extends Document {
   otherNames?: string[];
   scientificName: string;
   sizes: IWhaleSize[];
+  curiosities?: string[];
 }
