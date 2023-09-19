@@ -1,18 +1,7 @@
-import mongoose, { Document, Schema, Model } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
+import { IWhale, IWhaleSize } from '../interfaces/whaleTypes'
 
-interface IWhaleSize {
-  gender: "Male" | "Female";
-  length: number;
-}
-
-interface IWhale extends Document {
-  name: string;
-  otherNames?: string[];
-  scientificName: string;
-  sizes: IWhaleSize[];
-}
-
-const WhaleSizeSchema = new Schema({
+const WhaleSizeSchema = new Schema<IWhaleSize>({
   gender: {
     type: String,
     enum: ["Male", "Female"],
