@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from "mongoose";
-import { IWhale, IWhaleSize } from "../interfaces/whaleTypes";
+import { IWhale, IWhaleSize } from '../interfaces/whaleTypes'
 
 const WhaleSizeSchema = new Schema<IWhaleSize>({
   gender: {
@@ -33,14 +33,13 @@ const WhaleSchema = new Schema<IWhale>({
   },
   curiosities: {
     type: [String],
-    default: ["No information to display"],
-  },
+    default: ['No information to displa']
+  }
 });
 
 function arrayLimit(val: any[]) {
   return val.length <= 2;
 }
 
-const Whale: Model<IWhale> = mongoose.model("Whale", WhaleSchema);
+module.exports = mongoose.model("Whale", WhaleSchema);
 
-export default Whale;
