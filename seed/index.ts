@@ -8,7 +8,7 @@ const Whale = require('../models/Whale');
 const Map = require('../models/Map');
 
 const whales = require('./data/whales');
-const maps = require('./data/maps')
+const maps = require('./data/maps');
 
 const assignMaps = (whales: Partial<IWhale>[], maps: Partial<IMap>[]) : Partial<IMap>[] => {
   maps[0].whaleId = whales[0]._id;

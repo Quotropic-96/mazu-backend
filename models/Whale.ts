@@ -1,7 +1,7 @@
-import mongoose, { Schema, Model } from "mongoose";
-import { IWhale, IWhaleSize } from '../interfaces/whaleTypes'
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
-const WhaleSizeSchema = new Schema<IWhaleSize>({
+const WhaleSizeSchema = new Schema({
   gender: {
     type: String,
     enum: ["Male", "Female"],
@@ -13,7 +13,7 @@ const WhaleSizeSchema = new Schema<IWhaleSize>({
   },
 });
 
-const WhaleSchema = new Schema<IWhale>({
+const WhaleSchema = new Schema({
   name: {
     type: String,
     required: [true, "Whale's name is required"],
@@ -37,9 +37,9 @@ const WhaleSchema = new Schema<IWhale>({
   }
 });
 
-function arrayLimit(val: any[]) {
+function arrayLimit(val) {
   return val.length <= 2;
 }
 
-module.exports = mongoose.model("Whale", WhaleSchema);
+module.exports = model("Whale", WhaleSchema);
 
