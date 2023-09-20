@@ -28,4 +28,17 @@ router.get("/whale/:whaleId", async (req, res, next) => {
   }
 });
 
+// @desc    Get single map
+// @route   GET /api/v1/maps/:mapId/
+// @access  Public
+router.get("/:mapId", async (req, res, next) => {
+  const { mapId } = req.params;
+  try {
+    const maps = await Map.findById(mapId);
+    res.status(200).json(maps);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;
