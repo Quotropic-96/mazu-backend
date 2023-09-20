@@ -8,6 +8,7 @@ import logger from "morgan";
 import createError from "http-errors";
 
 import whalesRouter from "./routes/whales";
+import mapsRouter from "./routes/maps";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/v1/whales", whalesRouter);
+app.use("/api/v1/maps", mapsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

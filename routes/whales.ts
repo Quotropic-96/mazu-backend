@@ -26,6 +26,6 @@ router.get("/:whaleId", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 export default router;
