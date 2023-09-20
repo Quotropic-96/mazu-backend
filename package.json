@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./dist/app.js",
-    "dev": "nodemon ./dist/app.js",
+    "dev": "nodemon --watch '*.ts' --watch '**/*.ts' --exec 'ts-node' ./app.ts",
     "seed": "ts-node ./seed/index.ts"
   },
   "dependencies": {

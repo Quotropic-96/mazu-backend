@@ -9,7 +9,6 @@ import createError from "http-errors";
 
 import whalesRouter from "./routes/whales";
 
-
 const app = express();
 
 app.use(logger("dev"));
