@@ -1,14 +1,16 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+import dotenv from "dotenv";
+dotenv.config();
+import mongoose from 'mongoose';
+
 
 import { IWhale } from '../interfaces/whaleTypes';
 import { IMap } from '../interfaces/mapTypes';
 
-const Whale = require('../models/Whale');
-const Map = require('../models/Map');
+import Whale from '../models/Whale';
+import Map from '../models/Map';
 
-const whales = require('./data/whales');
-const maps = require('./data/maps');
+import whales from './data/whales';
+import maps from './data/maps';
 
 const assignMaps = (whales: Partial<IWhale>[], maps: Partial<IMap>[]) : Partial<IMap>[] => {
   maps[0].whaleId = whales[0]._id;

@@ -6,35 +6,35 @@ const maps: Partial<IMap>[] = [
   {
     url: "http://some-url.com/blue-whale-map1",
     whaleId: new mongoose.Types.ObjectId(),  // Replace with actual ObjectId
-    startMonth: "Jan",
-    endMonth: "Jun"
+    startMonth: 1,
+    endMonth: 6
   },
   {
     url: "http://some-url.com/blue-whale-map2",
     whaleId: new mongoose.Types.ObjectId(),  // Replace with actual ObjectId
-    startMonth: "Jul",
-    endMonth: "Dec"
+    startMonth: 7,
+    endMonth: 12
   },
   // Maps for Humpback Whale
   {
     url: "http://some-url.com/humpback-whale-map1",
     whaleId: new mongoose.Types.ObjectId(),  // Replace with actual ObjectId
-    startMonth: "Jan",
-    endMonth: "May"
+    startMonth: 1,
+    endMonth: 5
   },
   {
     url: "http://some-url.com/humpback-whale-map2",
     whaleId: new mongoose.Types.ObjectId(),  // Replace with actual ObjectId
-    startMonth: "Jun",
-    endMonth: "Dec"
+    startMonth: 6,
+    endMonth: 12
   },
   // Maps for Killer Whale
   {
     url: "http://some-url.com/killer-whale-map1",
     whaleId: new mongoose.Types.ObjectId(),  // Replace with actual ObjectId
-    startMonth: "Jan",
-    endMonth: "Dec"
+    startMonth: 1,
+    endMonth: 12
   }
 ];
 
-module.exports = maps;
+export default maps;

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import mongoose, { Schema, Model } from 'mongoose';
 import { IMap } from '../interfaces/mapTypes';
 
 const mapSchema = new Schema<IMap>({
@@ -12,16 +12,18 @@ const mapSchema = new Schema<IMap>({
     required: [true, 'Map must be associated with a whale'],
   },
   startMonth: {
-    type: String,
-    enum: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    type: Number,
+    min: 1,
+    max: 12,
     required: false,
-    default: 'Jan',
+    default: 1,
   },
   endMonth: {
-    type: String,
-    enum: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    type: Number,
+    min: 1,
+    max: 12,
     required: false,
-    default: 'Dec',
+    default: 12,
   },
 });
 

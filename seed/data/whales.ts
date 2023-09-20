@@ -30,4 +30,4 @@ const whales: Partial<IWhale>[] = [
   }
 ];
 
-module.exports = whales;
+export default whales;
