@@ -1,5 +1,6 @@
 import express from "express";
 import Map from "../models/Map";
+import isMonth from "../utils/isMonth";
 
 const router = express.Router();
 
@@ -15,14 +16,47 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
-// @desc    Get maps by whaleId
-// @route   GET /api/v1/maps/:whaleId/
+// @desc    Get maps by whaleId and optionally filter by selected month
+// @route   GET /api/v1/maps/whale/:whaleId?month?startMonth?endMonth
 // @access  Public
 router.get("/whale/:whaleId", async (req, res, next) => {
+  const monthQuery = req.query.month;
+  const startMonthQuery = req.query.startMonth;
+  const endMonthQuery = req.query.endMonth;
   const { whaleId } = req.params;
+
   try {
-    const maps = await Map.find({ whaleId : whaleId });
-    res.status(200).json(maps);
+    const maps = await Map.find({ whaleId });
+
+    // Check if a month query parameter exists
+    if (monthQuery) {
+      const month = Number(monthQuery);
+      if (!isMonth(month)) {
+        return res.status(400).json({ error: "Invalid month parameter" });
+      }
+      const filteredMaps = maps.filter(
+        (map) => map.startMonth <= month && map.endMonth >= month
+      );
+      return res.status(200).json(filteredMaps);
+    } else if (startMonthQuery && endMonthQuery) {
+      const startMonth = Number(startMonthQuery);
+      const endMonth = Number(endMonthQuery);
+      if (!isMonth(startMonth)) {
+        return res.status(400).json({ error: "Invalid start month parameter" });
+      }
+      if (!isMonth(endMonth)) {
+        return res.status(400).json({ error: "Invalid end month parameter" });
+      }
+      const filteredMaps = maps.filter(
+        (map) =>
+          map.startMonth < endMonth &&
+          (startMonth <= map.startMonth || startMonth < map.endMonth)
+      );
+      return res.status(200).json(filteredMaps);
+    }
+
+    // No month query parameter, return all maps for the whaleId
+    return res.status(200).json(maps);
   } catch (error) {
     next(error);
   }
