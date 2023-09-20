@@ -1,10 +1,22 @@
-const mongoose = require("mongoose");
-const { Schema, model } = mongoose;
+import mongoose, { Schema, Model, Document } from 'mongoose';
+
+interface WhaleSize {
+  gender: 'Male' | 'Female';
+  length: number;
+}
+
+interface IWhale extends Document {
+  name: string;
+  otherNames: string[];
+  scientificName: string;
+  sizes: WhaleSize[];
+  curiosities: string[];
+}
 
 const WhaleSizeSchema = new Schema({
   gender: {
     type: String,
-    enum: ["Male", "Female"],
+    enum: ['Male', 'Female'],
     required: true,
   },
   length: {
@@ -13,7 +25,7 @@ const WhaleSizeSchema = new Schema({
   },
 });
 
-const WhaleSchema = new Schema({
+const WhaleSchema = new Schema<IWhale>({
   name: {
     type: String,
     required: [true, "Whale's name is required"],
@@ -29,17 +41,18 @@ const WhaleSchema = new Schema({
   sizes: {
     type: [WhaleSizeSchema],
     required: [true, "Whale's size is required"],
-    validate: [arrayLimit, "Exceeds the limit of size records"],
+    validate: [arrayLimit, 'Exceeds the limit of size records'],
   },
   curiosities: {
     type: [String],
-    default: ['No information to displa']
-  }
+    default: ['No information to display'],
+  },
 });
 
-function arrayLimit(val) {
+function arrayLimit(val: any[]) {
   return val.length <= 2;
 }
 
-module.exports = model("Whale", WhaleSchema);
+const WhaleModel: Model<IWhale> = mongoose.model('Whale', WhaleSchema);
 
+export default WhaleModel;

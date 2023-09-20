@@ -1,12 +1,14 @@
-require("dotenv").config();
-require("./db/index.ts");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const createError = require('http-errors');
+import dotenv from "dotenv";
+dotenv.config();
+import "./db/index";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import createError from "http-errors";
 
-const whalesRouter = require("./routes/whales.ts");
+import whalesRouter from "./routes/whales";
+
 
 const app = express();
 
@@ -36,4 +38,4 @@ app.use(function (err, req, res, next) {
   }
 });
 
-module.exports = app;
+export default app;
