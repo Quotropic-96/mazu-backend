@@ -94,7 +94,7 @@ describe("Maps API", () => {
       }
     });
 
-    it("should fetch maps by whaleId and filter by startMonth and endMonth", async () => {
+    it("should fetch maps by whaleId and filter by startMonth and endMonth (1)", async () => {
       const whaleId = 1;
       findStub.resolves(mockMaps.filter((map) => map.whaleId === whaleId));
 
@@ -113,8 +113,52 @@ describe("Maps API", () => {
         },
       ]);
     });
+    it("should fetch maps by whaleId and filter by startMonth and endMonth (2)", async () => {
+      const whaleId = 1;
+      findStub.resolves(mockMaps.filter((map) => map.whaleId === whaleId));
 
-    // Additional test cases...
+      const res = await chai
+        .request(app)
+        .get(`/api/v1/maps/whale/${whaleId}?startMonth=7&endMonth=8`);
+
+      expect(res.status).to.equal(200);
+      expect(res.body).to.deep.equal([
+        {
+          _id: 2,
+          url: "http://some-url.com/blue-whale-map2",
+          whaleId: 1,
+          startMonth: 7,
+          endMonth: 12,
+        },
+      ]);
+    });
+
+    it("should fetch maps by whaleId and filter by startMonth and endMonth (3)", async () => {
+      const whaleId = 1;
+      findStub.resolves(mockMaps.filter((map) => map.whaleId === whaleId));
+
+      const res = await chai
+        .request(app)
+        .get(`/api/v1/maps/whale/${whaleId}?startMonth=3&endMonth=8`);
+
+      expect(res.status).to.equal(200);
+      expect(res.body).to.deep.equal([
+        {
+          _id: 1,
+          url: "http://some-url.com/blue-whale-map1",
+          whaleId: 1,
+          startMonth: 1,
+          endMonth: 6,
+        },
+        {
+          _id: 2,
+          url: "http://some-url.com/blue-whale-map2",
+          whaleId: 1,
+          startMonth: 7,
+          endMonth: 12,
+        },
+      ]);
+    });
   });
 
   describe("GET /api/v1/maps/:mapId", () => {
