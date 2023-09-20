@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app.ts');
-const debug = require('debug')('mazu-backend:server');
-const http = require('http');
+import app from '../app';
+import debugModule from 'debug';
+import http from 'http';
+
+const debug = debugModule('mazu-backend:server');
 
 /**
  * Get port from environment and store in Express.
