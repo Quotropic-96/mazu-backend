@@ -6,17 +6,22 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import createError from "http-errors";
+import cors from 'cors';
 
 import whalesRouter from "./routes/whales";
 import mapsRouter from "./routes/maps";
 
 const app = express();
 
+// cookies and loggers
+app.use(cors({
+  origin: process.env.ORIGIN
+}));
+app.set('trust proxy', 1);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/v1/whales", whalesRouter);
 app.use("/api/v1/maps", mapsRouter);
