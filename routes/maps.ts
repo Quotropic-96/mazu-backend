@@ -26,7 +26,7 @@ router.get("/whale/:whaleId", async (req, res, next) => {
   const { whaleId } = req.params;
 
   try {
-    const maps = await Map.find({ whaleId });
+    const maps = await Map.find({ whaleId }).populate("whaleId");
 
     // Check if a month query parameter exists
     if (monthQuery) {
